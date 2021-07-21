@@ -1,13 +1,12 @@
-
 import './App.css';
+import Contact from './Contact-us/Contact';
+import Footer from './Footer/Footer';
 
 function App() {
   return (
     <div className="App">
-     <div className="ashish">
-       
-
-     </div>
+      <Contact />
+      <Footer />
     </div>
   );
 }
