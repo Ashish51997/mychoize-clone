@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Context from '../Context/FilterContext';
 
 const FiltersContainer = styled.div`
 
@@ -68,7 +69,15 @@ const FiltersContainer = styled.div`
 `;
 
 const Filters = () => {
-    const flag = 0;
+    const value = React.useContext(Context);
+    const {filters, handleFilter} = value; 
+    const  {carTypes, fuelTypes, gearTypes} = filters;
+    // console.log(carTypes,fuelTypes,gearTypes);
+
+    const handleChange = (type, id, name, bool) => {
+        // console.log(type,id, name, bool);
+        handleFilter(type, id, name, bool);
+    }
 
     return (
         <FiltersContainer>
@@ -82,10 +91,9 @@ const Filters = () => {
                         {/* <div>-</div> */}
                     </div>
                     <div className="filters">
-                        <div className={flag ? "selected" : "unselected"}>Economy</div>
-                        <div className={flag ? "selected" : "unselected"}>Compact</div>
-                        <div className={flag ? "selected" : "unselected"}>Standard</div>
-                        <div className={flag ? "selected" : "unselected"}>Muv</div>
+                        {
+                            carTypes.map(ele => <div className={ele.selected ? "selected" : "unselected"} key={ele.id} onClick={() => handleChange(ele.type, ele.id, ele.name, ele.selected)}>{ele.name}</div>)
+                        }
                     </div>
                 </div>
 
@@ -95,8 +103,9 @@ const Filters = () => {
                         {/* <div>-</div> */}
                     </div>
                     <div className="filters">
-                        <div className={flag ? "selected" : "unselected"}>Petrol</div>
-                        <div className={flag ? "selected" : "unselected"}>Diesel</div>
+                        {
+                            fuelTypes.map(ele => <div className={ele.selected ? "selected" : "unselected"} key={ele.id} onClick={() => handleChange(ele.type, ele.id, ele.name, ele.selected)}>{ele.name}</div>)
+                        }
                     </div>
                 </div>
 
@@ -106,8 +115,9 @@ const Filters = () => {
                         {/* <div>-</div> */}
                     </div>
                     <div className="filters">
-                        <div className={flag ? "selected" : "unselected"}>Manual</div>
-                        <div className={flag ? "selected" : "unselected"}>Automatic</div>
+                        {
+                            gearTypes.map(ele => <div className={ele.selected ? "selected" : "unselected"} key={ele.id} onClick={() => handleChange(ele.type, ele.id, ele.name, ele.selected)}>{ele.name}</div>)
+                        }
                     </div>
                 </div>
 

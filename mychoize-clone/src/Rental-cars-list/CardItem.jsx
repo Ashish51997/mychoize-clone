@@ -1,12 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ImEye } from 'react-icons/im';
+import { FaRupeeSign } from 'react-icons/fa';
 import styled from 'styled-components';
+import Context from '../Context/FilterContext';
 
 const Card = styled.div`
     border: 1px solid lightgray;
     padding: 1%;
-    margin: 1%;
+    margin: 2% 1%;
+    transition: 01s;
+
+    :hover {
+        transition: 0s;
+        box-shadow: 1px 1px 20px lightgray;
+    }
 
     & > .carName {
         padding: 1%;
@@ -87,13 +95,13 @@ const Card = styled.div`
             > .bookNowBtn {
                 padding: 5% 2%;
                 background-color: yellow;
-                transition: 1s;
+                transition: 0.7s;
 
                 :hover {
                     cursor: pointer;
                     color: white;
                     background-color: red;
-                    transition: 1s;
+                    transition: 0.1s;
                 }
             }
         }
@@ -125,10 +133,13 @@ const Card = styled.div`
 `;
 
 const CardItem = ({item}) => {
+    const value = React.useContext(Context);
+    const {selectedToggle} = value;
+
     return (
         <Card>
             <div className="carName">
-                <div>{item.BrandName}</div>
+                <div>{item.car_name}</div>
                 <div>
                     <ImEye />
                     <span>&nbsp;&nbsp;</span>
@@ -140,26 +151,26 @@ const CardItem = ({item}) => {
 
                 {/* CAR IMAGE */}
                 <div className="carImage">
-                    <img src={item.VehicleBrandImageName} alt={item.BrandName} />
+                    <img src={item.car_image} alt={item.car_image} />
                 </div>
 
                 {/* CAR FEATURES (BAGGAGE, SEATER CAPACITIES & FUEL, TRANSMISSION TYPE) */}
                 <div className="carFeatures">
                     <div>
                         <div><img  src="/Search Cars/bag.png" alt="bag" /> </div>
-                        <div>{item.LuggageCapacity} Baggage</div>
+                        <div>{item.carrying_capacity}</div>
                     </div>
                     <div>
                         <div><img  src="/Search Cars/seat.png" alt="seat" /> </div>
-                        <div>{item.SeatingCapacity} seater</div>
+                        <div>{item.seater}</div>
                     </div>
                     <div>
                         <div><img  src="/Search Cars/fuel.png" alt="fuel" /> </div>
-                        <div>{item.FuelType}</div>
+                        <div>{item.fuel_type}</div>
                     </div>
                     <div>
                         <div><img  src="/Search Cars/transmission.png" alt="transmission" /> </div>
-                        <div>{item.TransMissionType}</div>
+                        <div>{item.gear_type}</div>
                     </div>
                 </div>
 
@@ -182,8 +193,10 @@ const CardItem = ({item}) => {
                 {/* PACKAGE DETAILS */}
                 <div className="carPackage">
                     <div>Rental</div>
-                    <div className="price">2,765/-</div>
-                    <div>Extra kms @ 7/km</div>
+                    <div className="price"><FaRupeeSign /> {selectedToggle === "120 km/day" ? item.limited_kms_price : item.unlimited_kms_price}</div>
+                    {
+                        selectedToggle === "120 km/day" ? <div>Extra kms @ <FaRupeeSign/> {item.extra_kms_price}/km</div> : false
+                    }
                     <div className="bookNowBtn">BOOK NOW</div>
                 </div>
             </div>
@@ -191,4 +204,4 @@ const CardItem = ({item}) => {
     )
 }
 
-export default CardItem
+export default CardItem;

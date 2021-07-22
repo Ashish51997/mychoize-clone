@@ -24,4 +24,4 @@ const RentalCarsMain = () => {
     )
 }
 
-export default RentalCarsMain
+export default RentalCarsMain;
