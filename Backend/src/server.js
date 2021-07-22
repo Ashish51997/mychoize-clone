@@ -7,9 +7,12 @@ app.use(express.json())
 
 const carController = require('./controller/car.controller') 
 const userController = require('./controller/user.controller')
+const {login, register} = require('./controller/auth.controller')
 
 app.use("/cars", carController)
 app.use("/users", userController)
+app.post("/login", login)
+app.post("/register", register)
 
 const start = async() => {
     await connect()

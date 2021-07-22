@@ -1,0 +1,46 @@
+[
+    {
+        "name":"Guy Lerohan",
+        "phone":"816-393-2970",
+        "email":"glerohan0@sciencedirect.com",
+        "password":"eGbaw2iGmZW",
+        "gender":"Others",
+        "dob":"16/06/1961",
+        "pan_no": "DAJPC4150P",
+        "address":"59 Burrows Park",
+        "state":"Missouri",
+        "pincode":"64130",
+        "documents": {
+            "dl_front": "",
+            "dl_back": "",
+            "adhar_front": "",
+            "adhar_back": ""
+        },
+        "upcoming_bookings": [],
+        "booking_history": [],
+        "subscription_booking": [],
+        "can_booking": []
+    },
+    {
+        "name":"Karla Sleep",
+        "phone":"253-205-1300",
+        "email":"ksleep1@bigcartel.com",
+        "password":"qrtfJwtvJ",
+        "gender":"Male",
+        "dob":"03/07/1996",
+        "pan_no": "BAJPC4350M",
+        "address":"126 Riverside Point",
+        "state":"Washington",
+        "pincode":"98424",
+        "documents": {
+            "dl_front": "",
+            "dl_back": "",
+            "adhar_front": "",
+            "adhar_back": ""
+        },
+        "upcoming_bookings": [],
+        "booking_history": [],
+        "subscription_booking": [],
+        "can_booking": []
+    }
+]
