@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { ImEye } from 'react-icons/im';
 import { FaRupeeSign } from 'react-icons/fa';
 import styled from 'styled-components';
@@ -30,6 +29,12 @@ const Card = styled.div`
         & :nth-child(2) > :nth-child(3) {
             font-size: 0.9em;
             color: red;
+            font-weight: 600;
+
+            :hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
         }
     }
 
@@ -132,75 +137,229 @@ const Card = styled.div`
     }
 `;
 
+const ModalContainer = styled.div`
+
+    & > .open {
+
+        & > .modal {
+            /* border: 5px solid cyan; */
+            border-radius: 10px;
+            box-shadow: 1px 1px 5px gray;
+            padding: 2%;
+            display: block;
+            position: fixed;
+            top: 0;
+            width: 50%;
+            margin: 2% auto;
+            background-color: white;
+            z-index: 3;
+            animation-name: fromTop;
+            animation-duration: 0.4s;
+
+            @keyframes fromTop {
+                from {
+                    top:-300px;
+                    opacity:0
+                }
+                to {
+                    top:0;
+                    opacity:100
+                }
+            }
+
+            & > .modalHead {
+                border-bottom: 1px solid lightgray;
+            }
+
+            & > .fareDetailsHead {
+                color: red;
+                font-weight: 700;
+                padding: 2%;
+            }
+
+            & > .fareDetails > div, .fareTotal {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 2%;
+            }
+
+            & > .fareTotal {
+                background-color: #e7e7e7;
+                margin: 3% 0;
+                font-size: 1.3em;
+
+                & :nth-child(2) {
+                    color: red;
+                }
+            }
+
+            & > .modalBtns {
+                display: flex;
+                justify-content: space-between;
+
+                & > div:nth-child(1) {
+                    background-color: black;
+                    color: white;
+                }
+
+                & > div:nth-child(2) {
+                    background-color: red;
+                    color: white;
+                }
+
+                & > div {
+                    padding: 2% 5%;
+                    border-radius: 3px;
+                    cursor: pointer;
+
+                    :hover {
+                        filter: contrast(70%);
+                        color: yellow;
+                    }
+                }
+            }
+        }
+
+        @media (max-width: 650px) {
+            width: 80%;
+            margin: 2% auto;
+        }
+    }
+
+    & > .close {
+        display: none;
+    }
+`;
+
 const CardItem = ({item}) => {
     const value = React.useContext(Context);
     const {selectedToggle} = value;
 
+    const [modal, setModal] = React.useState(false);
+
+    function openModal() {
+        setModal(true);
+    }
+
+    function closeModal() {
+        setModal(false);
+    }
+
+    // window.onclick = function(event) {
+    //     console.log(event)
+    // }
+
     return (
-        <Card>
-            <div className="carName">
-                <div>{item.car_name}</div>
-                <div>
-                    <ImEye />
-                    <span>&nbsp;&nbsp;</span>
-                    <Link to="/" >Fare Details</Link>
-                </div>
-            </div>
-
-            <div className="carDetails">
-
-                {/* CAR IMAGE */}
-                <div className="carImage">
-                    <img src={item.car_image} alt={item.car_image} />
-                </div>
-
-                {/* CAR FEATURES (BAGGAGE, SEATER CAPACITIES & FUEL, TRANSMISSION TYPE) */}
-                <div className="carFeatures">
+        <>
+            <Card>
+                <div className="carName">
+                    <div>{item.car_name}</div>
                     <div>
-                        <div><img  src="/Search Cars/bag.png" alt="bag" /> </div>
-                        <div>{item.carrying_capacity}</div>
-                    </div>
-                    <div>
-                        <div><img  src="/Search Cars/seat.png" alt="seat" /> </div>
-                        <div>{item.seater}</div>
-                    </div>
-                    <div>
-                        <div><img  src="/Search Cars/fuel.png" alt="fuel" /> </div>
-                        <div>{item.fuel_type}</div>
-                    </div>
-                    <div>
-                        <div><img  src="/Search Cars/transmission.png" alt="transmission" /> </div>
-                        <div>{item.gear_type}</div>
+                        <ImEye />
+                        <span>&nbsp;&nbsp;</span>
+                        <span onClick={openModal}>Fare Details</span>
                     </div>
                 </div>
 
-                {/* JOURNEY DETAILS (START & END DATES) */}
-                <div className="carJourney">
-                    <div>
-                        <div>8:00 AM 24th Jul,Sat</div>
+                <div className="carDetails">
+
+                    {/* CAR IMAGE */}
+                    <div className="carImage">
+                        <img src={item.car_image} alt={item.car_image} />
+                    </div>
+
+                    {/* CAR FEATURES (BAGGAGE, SEATER CAPACITIES & FUEL, TRANSMISSION TYPE) */}
+                    <div className="carFeatures">
                         <div>
-                            <img  src="/Search Cars/to.png" alt="to" />
+                            <div><img  src="/Search Cars/bag.png" alt="bag" /> </div>
+                            <div>{item.carrying_capacity}</div>
                         </div>
-                        <div>4:30 PM 25th Jul,Sun</div>
+                        <div>
+                            <div><img  src="/Search Cars/seat.png" alt="seat" /> </div>
+                            <div>{item.seater}</div>
+                        </div>
+                        <div>
+                            <div><img  src="/Search Cars/fuel.png" alt="fuel" /> </div>
+                            <div>{item.fuel_type}</div>
+                        </div>
+                        <div>
+                            <div><img  src="/Search Cars/transmission.png" alt="transmission" /> </div>
+                            <div>{item.gear_type}</div>
+                        </div>
                     </div>
 
-                    {/* TOTAL JOURNEY DURATION */}
-                    <div>
-                        1 Day(s) 9 Hour(s)
+                    {/* JOURNEY DETAILS (START & END DATES) */}
+                    <div className="carJourney">
+                        <div>
+                            <div>8:00 AM 24th Jul,Sat</div>
+                            <div>
+                                <img  src="/Search Cars/to.png" alt="to" />
+                            </div>
+                            <div>4:30 PM 25th Jul,Sun</div>
+                        </div>
+
+                        {/* TOTAL JOURNEY DURATION */}
+                        <div>
+                            1 Day(s) 9 Hour(s)
+                        </div>
+                    </div>
+
+                    {/* PACKAGE DETAILS */}
+                    <div className="carPackage">
+                        <div>Rental</div>
+                        <div className="price"><FaRupeeSign /> {selectedToggle === "120 km/day" ? item.limited_kms_price : item.unlimited_kms_price}</div>
+                        {
+                            selectedToggle === "120 km/day" ? <div>Extra kms @ <FaRupeeSign/> {item.extra_kms_price}/km</div> : false
+                        }
+                        <div className="bookNowBtn">BOOK NOW</div>
                     </div>
                 </div>
+            </Card>
 
-                {/* PACKAGE DETAILS */}
-                <div className="carPackage">
-                    <div>Rental</div>
-                    <div className="price"><FaRupeeSign /> {selectedToggle === "120 km/day" ? item.limited_kms_price : item.unlimited_kms_price}</div>
-                    {
-                        selectedToggle === "120 km/day" ? <div>Extra kms @ <FaRupeeSign/> {item.extra_kms_price}/km</div> : false
-                    }
-                    <div className="bookNowBtn">BOOK NOW</div>
+            <ModalContainer>
+                <div className={modal ? "open" : "close"}>
+                    <div className="modal">
+                        <div className="modalHead">
+                            <h3>FARE BREAKUP</h3>
+                        </div>
+
+                        <div className="fareDetailsHead">
+                            <div>Fare Details</div>
+                        </div>
+
+                        <div className="fareDetails">
+                            <div>
+                                <div>Rental</div>
+                                <div><FaRupeeSign /> {selectedToggle === "120 km/day" ? item.limited_kms_price : item.unlimited_kms_price}</div>
+                            </div>
+                            <div>
+                                <div>Refundable Deposit</div>
+                                <div><FaRupeeSign /> {item.refundable_deposit}</div>
+                            </div>
+                            <div>
+                                <div>CGST</div>
+                                <div><FaRupeeSign /> {0}</div>
+                            </div>
+                            <div>
+                                <div>SGST</div>
+                                <div><FaRupeeSign /> {0}</div>
+                            </div>
+                        </div>
+
+                        <div className="fareTotal">
+                            <div>Total Payable Amount</div>
+                            <div><FaRupeeSign /> {selectedToggle === "120 km/day" ? item.limited_kms_price + item.refundable_deposit : item.unlimited_kms_price + item.refundable_deposit}</div>
+                        </div>
+                        
+                        <div className="modalBtns">
+                            <div onClick={closeModal}>CLOSE</div>
+                            <div>BOOK NOW</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </Card>
+            </ModalContainer>
+        </>
     )
 }
 

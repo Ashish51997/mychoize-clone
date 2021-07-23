@@ -49,10 +49,10 @@ export const ContextProvider = ({children}) => {
                 setData(data.filter(ele => ele.car_type === name));
                 setCount(count + 1);
             }
-            else if (count > 1) {
-                setData(data.filter(ele => ele.car_type !== name));
-                setCount(count- 1);
-            }
+            // else if (count > 1) {
+            //     setData(data.filter(ele => ele.car_type !== name));
+            //     setCount(count- 1);
+            // }
             else {
                 setData(carList);
                 setCount(0);
@@ -64,10 +64,10 @@ export const ContextProvider = ({children}) => {
                 setData(data.filter(ele => ele.fuel_type === name));
                 setCount(count + 1);
             }
-            else if (count > 1) {
-                setData(data.filter(ele => ele.fuel_type !== name));
-                setCount(count- 1);
-            }
+            // else if (count > 1) {
+            //     setData(data.filter(ele => ele.fuel_type !== name));
+            //     setCount(count- 1);
+            // }
             else {
                 setData(carList);
                 setCount(0);
@@ -79,10 +79,10 @@ export const ContextProvider = ({children}) => {
                 setData(data.filter(ele => ele.gear_type === name));
                 setCount(count + 1);
             }
-            else if (count > 1) {
-                setData(data.filter(ele => ele.gear_type !== name));
-                setCount(count- 1);
-            }
+            // else if (count > 1) {
+            //     setData(data.filter(ele => ele.gear_type !== name));
+            //     setCount(count- 1);
+            // }
             else {
                 setData(carList);
                 setCount(0);

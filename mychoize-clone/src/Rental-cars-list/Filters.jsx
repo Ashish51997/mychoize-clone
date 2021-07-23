@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import Context from '../Context/FilterContext';
 
 const FiltersContainer = styled.div`
+    position: sticky;
+    top: 0;
+    height: fit-content;
+    padding-top: 5%;
 
     & > .filterHead {
         text-align: center;
@@ -63,9 +67,9 @@ const FiltersContainer = styled.div`
         }
     }
 
-    /* @media (max-width: 650px) {
-        display: none;
-    } */
+    @media (max-width: 650px) {
+        position: static;
+    }
 `;
 
 const Filters = () => {
