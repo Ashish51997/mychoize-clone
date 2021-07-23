@@ -1,13 +1,12 @@
 
 import './App.css';
+import Carousal from './components/Landing page/carousal';
 
 function App() {
   return (
     <div className="App">
-     <div className="ashish">
-       
-
-     </div>
+      <Carousal/>
+    
     </div>
   );
 }
