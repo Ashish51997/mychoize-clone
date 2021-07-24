@@ -1,13 +1,11 @@
-
 import './App.css';
-import { Login } from './components/Login/Login';
-import Carousal from './Components/LandingPage/Landingpage';
+import { Routes } from './Routes/Routes';
+
 
 function App() {
   return (
     <div className="App">
-     <Login />
-     <Carousal/>
+      <Routes />
     </div>
   );
 }
