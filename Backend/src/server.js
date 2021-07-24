@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-
+const port = process.env.PORT || 2255
 const connect = require('../src/config/db')
 
 app.use(express.json())
@@ -16,8 +16,8 @@ app.post("/register", register)
 
 const start = async() => {
     await connect()
-    app.listen(2255, ()=>{
-        console.log("listening on port 2255")
+    app.listen(port, ()=>{
+        console.log(`listening on port ${port}`)
     })
 }
 
