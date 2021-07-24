@@ -103,7 +103,7 @@ const Login = () => {
         .then(res => {setUser(res.data)})
         .catch(err => alert(err))
     }
-
+    
     return (
         <div className={styles.mainContainer}>
             <div className={styles.imageBox}>
