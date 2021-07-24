@@ -110,6 +110,10 @@ export const ContextProvider = ({children}) => {
         setSelectedCar(item);
     }
 
+    const handleTotal = (sum) => {
+        setSelectedCar({...selectedCar, totalSum: selectedCar.totalSum + sum});
+    }
+
     // React.useEffect(() => {
     //     axios.get(`https://mychoize-backend.herokuapp.com/cars`)
     //         .then (async res => {
@@ -130,7 +134,8 @@ export const ContextProvider = ({children}) => {
         selectedToggle,
         handleSelectToggle,
         selectedCar,
-        handleSelectedCar
+        handleSelectedCar,
+        handleTotal
     };
 
     return <Context.Provider value={value}>

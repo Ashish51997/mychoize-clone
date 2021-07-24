@@ -1,9 +1,10 @@
 import React from 'react'
+import OrderForm from './OrderForm'
 
-const RideDetails = () => {
+const RideDetails = ({item}) => {
     return (
         <div>
-            
+            <OrderForm item={item} />
         </div>
     )
 }

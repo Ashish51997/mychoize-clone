@@ -3,7 +3,7 @@ import { ImEye } from 'react-icons/im';
 import { FaRupeeSign } from 'react-icons/fa';
 import styled from 'styled-components';
 import Context from '../../Context/FilterContext';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom';
 
 const Card = styled.div`
     border: 1px solid lightgray;
@@ -274,7 +274,14 @@ const CardItem = ({item}) => {
     // }
 
     const selectedCar = (item) => {
-        handleSelectedCar({...item, toggleType: selectedToggle});
+        let total = 0;
+        if (selectedToggle === "120 km/day") {
+            total = item.limited_kms_price + item.refundable_deposit + 2 * (item.limited_kms_price * 18 /100);
+        }
+        else {
+            total = item.unlimited_kms_price + item.refundable_deposit + 2 * (item.unlimited_kms_price * 18 /100);
+        }
+        handleSelectedCar({...item, toggleType: selectedToggle, totalSum: total});
     } 
 
     return (
@@ -386,7 +393,7 @@ const CardItem = ({item}) => {
 
                         <div className="fareTotal">
                             <div>Total Payable Amount</div>
-                            <div><FaRupeeSign /> {selectedToggle === "120 km/day" ? item.limited_kms_price + item.refundable_deposit : item.unlimited_kms_price + item.refundable_deposit}/-</div>
+                            <div><FaRupeeSign /> {selectedToggle === "120 km/day" ? item.limited_kms_price + item.refundable_deposit + 2 * (item.limited_kms_price * 18 /100) : item.unlimited_kms_price + item.refundable_deposit + 2 * (item.unlimited_kms_price * 18 /100)}/-</div>
                         </div>
                         
                         <div className="modalBtns">
