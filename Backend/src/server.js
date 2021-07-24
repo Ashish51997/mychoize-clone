@@ -1,9 +1,11 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const port = process.env.PORT || 2255
 const connect = require('../src/config/db')
 
 app.use(express.json())
+app.use(cors())
 
 const carController = require('./controller/car.controller') 
 const userController = require('./controller/user.controller')
