@@ -1,14 +1,16 @@
 import './App.css';
+import Routes from './Routes/Routes';
 // import ContactMain from './Contact-us/ContactMain';
-import FooterMain from './Footer/FooterMain';
-import RentalCarsMain from './Rental-cars-list/RentalCarsMain';
+// import FooterMain from './Footer/FooterMain';
+// import RentalCarsMain from './Rental-cars-list/RentalCarsMain';
 
 function App() {
   return (
     <div className="App">
-      <RentalCarsMain />
+      <Routes />
+      {/* <RentalCarsMain /> */}
       {/* <ContactMain /> */}
-      <FooterMain />
+      {/* <FooterMain /> */}
     </div>
   );
 }

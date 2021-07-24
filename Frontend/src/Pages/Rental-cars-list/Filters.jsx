@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Context from '../Context/FilterContext';
+import Context from '../../Context/FilterContext';
 
 const FiltersContainer = styled.div`
     position: sticky;

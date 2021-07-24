@@ -36,4 +36,4 @@ const QuickLinks = () => {
     )
 }
 
-export default QuickLinks
+export default QuickLinks;

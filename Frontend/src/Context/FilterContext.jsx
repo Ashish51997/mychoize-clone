@@ -1,4 +1,5 @@
 import React from 'react';
+// import axios from 'axios';
 import carList from "../db2.json";
 
 const Context = React.createContext();
@@ -30,12 +31,15 @@ export const ContextProvider = ({children}) => {
         ]
     });
 
+    // const [init, setInit] = React.useState([]);
     const [data, setData] = React.useState(carList);
 
     const [selectedToggle, setToggle] = React.useState("120 km/day");
 
     const [count, setCount] = React.useState(0);
     // console.log(data);
+
+    const [selectedCar, setSelectedCar] = React.useState();
 
     const handleFilter = (key, id, name, bool) => {
         // filters[key].map(ele => ele.id === id ? console.log(ele) : ele)
@@ -100,7 +104,22 @@ export const ContextProvider = ({children}) => {
 
     const handleSelectToggle = (name) => {
         setToggle(name);
+    };
+
+    const handleSelectedCar = (item) => {
+        setSelectedCar(item);
     }
+
+    // React.useEffect(() => {
+    //     axios.get(`https://mychoize-backend.herokuapp.com/cars`)
+    //         .then (async res => {
+    //             await setData(res.data);
+    //             await setInit(res.data);
+    //         })
+    //         .catch (err => {
+    //             console.log(err.message);
+    //         })
+    // })
 
     const value = {
         count,
@@ -109,7 +128,9 @@ export const ContextProvider = ({children}) => {
         handleFilter,
         handleToggle,
         selectedToggle,
-        handleSelectToggle
+        handleSelectToggle,
+        selectedCar,
+        handleSelectedCar
     };
 
     return <Context.Provider value={value}>

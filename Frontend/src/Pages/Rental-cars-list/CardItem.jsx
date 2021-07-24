@@ -2,7 +2,8 @@ import React from 'react';
 import { ImEye } from 'react-icons/im';
 import { FaRupeeSign } from 'react-icons/fa';
 import styled from 'styled-components';
-import Context from '../Context/FilterContext';
+import Context from '../../Context/FilterContext';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Card = styled.div`
     border: 1px solid lightgray;
@@ -54,7 +55,13 @@ const Card = styled.div`
             background-color: #ececec;
         }
 
-        & > .carFeatures > div {
+        & > .carFeatures > .freeKm {
+            padding: 1%;
+            font-size: 1.1em;
+            color: red;
+        }
+
+        & > .carFeatures > .feature {
             padding: 1%;
             display: flex;
             flex-direction: row;
@@ -101,6 +108,15 @@ const Card = styled.div`
                 padding: 5% 2%;
                 background-color: yellow;
                 transition: 0.7s;
+
+                & > * {
+                    text-decoration: none;
+                    color: black;
+
+                    :hover {
+                        color: white;
+                    }
+                }
 
                 :hover {
                     cursor: pointer;
@@ -205,7 +221,14 @@ const ModalContainer = styled.div`
 
                 & > div:nth-child(2) {
                     background-color: red;
-                    color: white;
+                    & > * {
+                        text-decoration: none;
+                        color: white;
+
+                        :hover {
+                            color: yellow;
+                        }
+                    }
                 }
 
                 & > div {
@@ -234,7 +257,7 @@ const ModalContainer = styled.div`
 
 const CardItem = ({item}) => {
     const value = React.useContext(Context);
-    const {selectedToggle} = value;
+    const {selectedToggle, handleSelectedCar} = value;
 
     const [modal, setModal] = React.useState(false);
 
@@ -249,6 +272,10 @@ const CardItem = ({item}) => {
     // window.onclick = function(event) {
     //     console.log(event)
     // }
+
+    const selectedCar = (item) => {
+        handleSelectedCar({...item, toggleType: selectedToggle});
+    } 
 
     return (
         <>
@@ -271,22 +298,29 @@ const CardItem = ({item}) => {
 
                     {/* CAR FEATURES (BAGGAGE, SEATER CAPACITIES & FUEL, TRANSMISSION TYPE) */}
                     <div className="carFeatures">
-                        <div>
+                        <div className="feature">
                             <div><img  src="/Search Cars/bag.png" alt="bag" /> </div>
                             <div>{item.carrying_capacity}</div>
                         </div>
-                        <div>
+                        <div className="feature">
                             <div><img  src="/Search Cars/seat.png" alt="seat" /> </div>
                             <div>{item.seater}</div>
                         </div>
-                        <div>
+                        <div className="feature">
                             <div><img  src="/Search Cars/fuel.png" alt="fuel" /> </div>
                             <div>{item.fuel_type}</div>
                         </div>
-                        <div>
+                        <div className="feature">
                             <div><img  src="/Search Cars/transmission.png" alt="transmission" /> </div>
                             <div>{item.gear_type}</div>
                         </div>
+
+                        {
+                            selectedToggle === "120 km/day" ? 
+                            <div className="freeKm">
+                                {item.free_kms} free kms
+                            </div> : false
+                        }
                     </div>
 
                     {/* JOURNEY DETAILS (START & END DATES) */}
@@ -300,9 +334,12 @@ const CardItem = ({item}) => {
                         </div>
 
                         {/* TOTAL JOURNEY DURATION */}
-                        <div>
-                            1 Day(s) 9 Hour(s)
-                        </div>
+                        {
+                            selectedToggle === "120 km/day" ? 
+                            <div>
+                                1 Day(s) 9 Hour(s)
+                            </div> : false
+                        }
                     </div>
 
                     {/* PACKAGE DETAILS */}
@@ -310,9 +347,9 @@ const CardItem = ({item}) => {
                         <div>Rental</div>
                         <div className="price"><FaRupeeSign /> {selectedToggle === "120 km/day" ? item.limited_kms_price : item.unlimited_kms_price}</div>
                         {
-                            selectedToggle === "120 km/day" ? <div>Extra kms @ <FaRupeeSign/> {item.extra_kms_price}/km</div> : false
+                            selectedToggle === "120 km/day" ? <div>Extra kms @ <FaRupeeSign/>{item.extra_kms_price}/km</div> : false
                         }
-                        <div className="bookNowBtn">BOOK NOW</div>
+                        <div className="bookNowBtn"><Link to='/car-details' onClick={() => selectedCar(item)}>BOOK NOW</Link></div>
                     </div>
                 </div>
             </Card>
@@ -339,22 +376,22 @@ const CardItem = ({item}) => {
                             </div>
                             <div>
                                 <div>CGST</div>
-                                <div><FaRupeeSign /> {0}</div>
+                                <div><FaRupeeSign /> {selectedToggle === "120 km/day" ? item.limited_kms_price * 18 / 100 : item.unlimited_kms_price * 18 /100}</div>
                             </div>
                             <div>
                                 <div>SGST</div>
-                                <div><FaRupeeSign /> {0}</div>
+                                <div><FaRupeeSign /> {selectedToggle === "120 km/day" ? item.limited_kms_price * 18 / 100 : item.unlimited_kms_price * 18 /100}</div>
                             </div>
                         </div>
 
                         <div className="fareTotal">
                             <div>Total Payable Amount</div>
-                            <div><FaRupeeSign /> {selectedToggle === "120 km/day" ? item.limited_kms_price + item.refundable_deposit : item.unlimited_kms_price + item.refundable_deposit}</div>
+                            <div><FaRupeeSign /> {selectedToggle === "120 km/day" ? item.limited_kms_price + item.refundable_deposit : item.unlimited_kms_price + item.refundable_deposit}/-</div>
                         </div>
                         
                         <div className="modalBtns">
                             <div onClick={closeModal}>CLOSE</div>
-                            <div>BOOK NOW</div>
+                            <div className="bookNowBtn"><Link to='/car-details' onClick={() => selectedCar(item)}>BOOK NOW</Link></div>
                         </div>
                     </div>
                 </div>
