@@ -13,11 +13,13 @@ const login = async(req, res) =>{
 
     if(! user) return res.status(400).json({status: "failed", message: "Invalid Email or Password"})
 
-    const match = user.checkPassword(req.body.password)
+    const match = await user.checkPassword(req.body.password)
 
     if(! match) return res.status(400).json({status: "failed", message: "Invalid Password"})
 
     const token = newToken(user)
+
+    user = await User.findOne({_id: user._id}, {password: 0}).lean().exec()
     
     return res.status(200).json({user, token})
 

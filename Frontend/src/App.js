@@ -1,13 +1,11 @@
-
 import './App.css';
-import Carousal from './Components/LandingPage/Landingpage';
-import Profile from './Components/User Profile/profile';
+import { Routes } from './Routes/Routes';
+
 
 function App() {
   return (
     <div className="App">
-     {/* <Carousal/> */}
-     <Profile/>
+      <Routes />
     </div>
   );
 }
