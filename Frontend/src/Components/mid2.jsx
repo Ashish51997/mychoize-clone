@@ -7,10 +7,10 @@ const Mid2 = () => {
   const [step2, setStep2] = useState(false);
   const [step3, setStep3] = useState(false);
   const [step4, setStep4] = useState(false);
-  var one = document.getElementById("one");
-  var two = document.getElementById("two");
-  var three = document.getElementById("three");
-  var four = document.getElementById("four");
+  // var one = document.getElementById("one");
+  // var two = document.getElementById("two");
+  // var three = document.getElementById("three");
+  // var four = document.getElementById("four");
 
   const viewStep1 = () => {
     setStep1(true);
@@ -60,6 +60,7 @@ const Mid2 = () => {
             </Button3>
             <Button4 value={step4} id="four" onClick={viewStep4}>
               Step 4
+              
             </Button4>
           </ButtonWrapper>
           <ItemWrapper>
