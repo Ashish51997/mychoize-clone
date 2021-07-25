@@ -165,7 +165,7 @@
 
 .opBtn{
     height: 35px;
-    width: 50%;
+    width: auto;
     margin-top: 10%;
     cursor: pointer;
     border-radius: 3px;

@@ -1,8 +1,9 @@
 import React from 'react'
 import styles from "./Login.module.css"
-import axios from "axios"
 import { Redirect } from "react-router-dom";
-import { saveLogin, logout, getItem } from '../../Redux/localStorage'
+import { saveLogin } from '../../Redux/localStorage'
+import {loginReq, registerReq} from "../../Redux/Login/action"
+import { useDispatch, useSelector } from "react-redux";
 
 const initLoginState = {
     login_email: "",
@@ -18,7 +19,13 @@ const initRegisterState = {
 }
 
 const Login = () => {
-    const [auth, setAuth] = React.useState(false)
+
+    const isAuth = useSelector((state) => state.login.isAuth)
+    const data = useSelector((state) => state.login.data)
+    const token = useSelector((state) => state.login.token)
+    const isError = useSelector((state) => state.login.isError)
+    const isLoading = useSelector((state) => state.login.isLoading)
+
     //login
     const [loginState, setloginState] = React.useState(initLoginState)
     const {login_email, login_password} = loginState
@@ -26,9 +33,7 @@ const Login = () => {
     const [registerState, setRegisterState] = React.useState(initRegisterState)
     const {first_name, last_name, reg_email, phone, reg_password} = registerState
 
-    const [user, setUser] = React.useState({})
-
-    const [userToken, setUsertoken] = React.useState("")
+    const dispatch = useDispatch()
 
     const handleLoginData = (e) => {
         const {name, value} = e.target
@@ -44,27 +49,13 @@ const Login = () => {
             password: loginState.login_password
         }
         console.log(data)
-        axios.post(`https://mychoize-backend.herokuapp.com/login`,data, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then(res => {setUser(res.data)})
-        .catch(err => alert(err))
+        dispatch(loginReq(data))
     }
-    
-    React.useEffect(() => {
-        saveLogin("token", user.token)
-        saveLogin("user", user.user)
-        setUsertoken(getItem("token"))
-    }, [user])
 
-    //logout
-    const handleLogout = () => {
-        // setUser({})
-        setAuth(true)
-        logout()
-    }
+    React.useEffect(() => {
+        saveLogin("token", token)
+        saveLogin("user", data)
+    }, [token, data])
 
     //change tabs
     const [register, setRegister] = React.useState(false)
@@ -95,16 +86,10 @@ const Login = () => {
             name: `${registerState.first_name} ${registerState.last_name}`
         }
         console.log(data)
-        axios.post(`https://mychoize-backend.herokuapp.com/register`,data, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then(res => {setUser(res.data)})
-        .catch(err => alert(err))
+        dispatch(registerReq(data))
     }
     
-    if(auth){
+    if(isAuth){
         return(
             <Redirect to={"/"} push />
         )
@@ -134,7 +119,7 @@ const Login = () => {
                         <input name="reg_password" value={reg_password} onChange={handleregChange} placeholder="Choose Password"></input>
                         {/* <input placeholder="Confrim Password"></input> */}
                     </div>
-                    <button className={styles.signupBtn} onClick={()=> handleRegister()}>Signup Now</button>
+                    <button className={styles.signupBtn} onClick={()=> handleRegister()}>{isLoading ? "Loading..." : "Signup Now"}</button>
                 </div>}
                 {!register && <div>
                     <div className={styles.inputContiner}>
@@ -142,9 +127,8 @@ const Login = () => {
                         <input name="login_password" value={login_password} placeholder="Password" onChange={handleLoginData}></input>
                         <p>Forgot Password ?</p>
                     </div>
-                    <button className={styles.signupBtn} onClick={()=> handleLogin()}>Login</button>
+                    <button className={styles.signupBtn} onClick={()=> handleLogin()}>{isLoading ? "Loading..." : "Login"}</button>
                 </div>}
-                <button onClick={()=> handleLogout()}>Logout</button>
             </div>
         </div>
     )

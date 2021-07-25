@@ -3,6 +3,8 @@ import styles from "./Navbar.module.css"
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import Popper from '@material-ui/core/Popper';
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -19,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
 
 const YellowNav = () => {
 
+    const isAuth = useSelector((state) => state.login.isAuth)
+
+    const history = useHistory();
+
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
   
@@ -29,9 +35,13 @@ const YellowNav = () => {
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popper' : undefined;
 
+    const goHome = () => {
+        history.push("/")
+    }
+
     return (
         <div className={styles.yellowNav}>
-                    <div className={styles.navYellowLogo}>
+                    <div onClick={()=>goHome()} className={styles.navYellowLogo}>
                         <img className={styles.img} src="https://www.mychoize.com/imgs/icons/MyChoize-logo-2.png" alt="logo" />
                     </div>
                     <div className={styles.yellowNavInput}>
@@ -46,10 +56,14 @@ const YellowNav = () => {
                     <div className={styles.opBtnContainer}>
                         <button aria-describedby={id} type="button" onClick={handleClick} className={styles.opBtn}><MenuIcon fontSize="inherit" /></button>
                         <Popper id={id} open={open} anchorEl={anchorEl}>
-                            <div className={classes.paper}>
+                            {! isAuth && <div className={classes.paper}>
                                 <p className={classes.pTag}>Login</p>
                                 <p className={classes.pTag}>Register</p>
-                            </div>
+                            </div>}
+                            {isAuth && <div className={classes.paper}>
+                                <p className={classes.pTag}>My Acoount</p>
+                                <p className={classes.pTag}>Logout</p>
+                            </div>}
                         </Popper>
                     </div>
         </div>
