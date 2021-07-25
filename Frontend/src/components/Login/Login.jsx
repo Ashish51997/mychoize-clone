@@ -1,7 +1,8 @@
 import React from 'react'
 import styles from "./Login.module.css"
 import axios from "axios"
-import { saveLogin, logout } from './localStorage'
+import { Redirect } from "react-router-dom";
+import { saveLogin, logout, getItem } from './localStorage'
 
 const initLoginState = {
     login_email: "",
@@ -17,6 +18,7 @@ const initRegisterState = {
 }
 
 const Login = () => {
+    const [auth, setAuth] = React.useState(false)
     //login
     const [loginState, setloginState] = React.useState(initLoginState)
     const {login_email, login_password} = loginState
@@ -25,6 +27,8 @@ const Login = () => {
     const {first_name, last_name, reg_email, phone, reg_password} = registerState
 
     const [user, setUser] = React.useState({})
+
+    const [userToken, setUsertoken] = React.useState("")
 
     const handleLoginData = (e) => {
         const {name, value} = e.target
@@ -48,21 +52,17 @@ const Login = () => {
         .then(res => {setUser(res.data)})
         .catch(err => alert(err))
     }
-
+    
     React.useEffect(() => {
-        setData()
-    }, [user])
-
-    const setData = () =>{
-        console.log(user)
         saveLogin("token", user.token)
-        // saveLogin("isAuth", true)
         saveLogin("user", user.user)
-    }
+        setUsertoken(getItem("token"))
+    }, [user])
 
     //logout
     const handleLogout = () => {
         // setUser({})
+        setAuth(true)
         logout()
     }
 
@@ -104,6 +104,12 @@ const Login = () => {
         .catch(err => alert(err))
     }
     
+    if(auth){
+        return(
+            <Redirect to={"/"} push />
+        )
+    }
+
     return (
         <div className={styles.mainContainer}>
             <div className={styles.imageBox}>
