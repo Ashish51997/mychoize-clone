@@ -1,4 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:ital@1&display=swap');
+
 .App {
+  font-family: 'Heebo', sans-serif;
+  text-align: center;
+  width: 100%; 
+  
+}
+::-webkit-scrollbar {
+  display: none;
   font-family: 'Heebo', sans-serif;
 }
 

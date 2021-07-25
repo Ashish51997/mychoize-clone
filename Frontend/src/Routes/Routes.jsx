@@ -1,39 +1,31 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom';
-import RentalCarsMain from '../Pages/Rental-cars-list/RentalCarsMain';
-import ContactMain from '../Pages/Contact-us/ContactMain';
-import FooterMain from '../Pages/Footer/FooterMain';
-import ErrorPage from '../ErrorPage';
-import CarDetailsMain from '../Pages/CarDetails/CarDetailsMain';
+import { Route, Switch } from 'react-router-dom'
+import Carousal from "../Components/LandingPage/Landingpage"
+import {Login} from "../Components/Login/Login"
+import { Navbar } from '../Components/Navbar/Navbar'
+import { YellowNav } from '../Components/Navbar/YellowNav'
+import Profile from '../Components/User Profile/profile'
 
 const Routes = () => {
+
     return (
-        <Switch>
-            <Route exact path="/">
-                <RentalCarsMain />
-                <FooterMain />
-            </Route>
-
-            <Route path="/rent-cars">
-                <RentalCarsMain />
-                <FooterMain />
-            </Route>
-
-            <Route path="/contact-us">
-                <ContactMain />
-                <FooterMain />
-            </Route>
-
-            <Route path="/car-details">
-                <CarDetailsMain />
-                <FooterMain />
-            </Route>
-
-            <Route>
-                <ErrorPage />
-            </Route>
-        </Switch>
+        <div>
+            <Switch>
+                <Route path="/" exact>
+                    <Navbar />
+                    <Carousal />
+                </Route>
+                <Route path="/user/login">
+                    <YellowNav />
+                    <Login />
+                </Route>
+                <Route path="/profile">
+                    <YellowNav />
+                    <Profile />
+                </Route>
+            </Switch>
+        </div>
     )
 }
 
-export default Routes;
+export {Routes}
