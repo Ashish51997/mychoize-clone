@@ -2,7 +2,7 @@ import React from 'react'
 import styles from "./Login.module.css"
 import axios from "axios"
 import { Redirect } from "react-router-dom";
-import { saveLogin, logout, getItem } from './localStorage'
+import { saveLogin, logout, getItem } from '../../Redux/localStorage'
 
 const initLoginState = {
     login_email: "",
