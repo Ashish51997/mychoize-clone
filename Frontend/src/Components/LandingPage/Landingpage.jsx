@@ -93,7 +93,7 @@ function Carousal() {
   };
   return (
     <>
-      <div>
+      <div style={{marginTop: "7%"}}>
         <Wrapper>
           <Slider {...settings}>
             <div style={custom}>
@@ -262,6 +262,7 @@ export default Carousal;
 
 const Timecontainer = styled.div`
   display: flex;
+  font-family: 'Puritan', sans-serif;
   flex-direction: column;
   font-size: 11px;
   text-align: left;
@@ -273,6 +274,7 @@ const Timecontainer = styled.div`
 
 const Wrapper = styled.div`
   width: 100%;
+  font-family: 'Puritan', sans-serif;
   overflow: hidden;
   text-align: center;
 
@@ -297,7 +299,7 @@ const Wrapper = styled.div`
 const DatePickerStyle = styled.div`
   display: flex;
   justify-content: space-evenly;
-
+  font-family: 'Puritan', sans-serif;
   input {
     border: none;
     border-bottom: 2px solid #999999;
@@ -313,16 +315,19 @@ const TimeDiv = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 50px;
+  font-family: 'Puritan', sans-serif;
 `;
 const Picktime = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
+  font-family: 'Puritan', sans-serif;
 `;
 
 const Datecontainer = styled.div`
   height: 400px;
   width: 85%;
+  font-family: 'Puritan', sans-serif;
   background-color: rgb(246, 246, 246);
   margin-right: 10px;
   z-index: 100;
