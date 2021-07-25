@@ -9,10 +9,12 @@ app.use(cors())
 
 const carController = require('./controller/car.controller') 
 const userController = require('./controller/user.controller')
+const cityController = require('./controller/city.controller')
 const {login, register} = require('./controller/auth.controller')
 
 app.use("/cars", carController)
 app.use("/users", userController)
+app.use("/city", cityController)
 app.post("/login", login)
 app.post("/register", register)
 

@@ -1,0 +1,25 @@
+[
+    {
+        "name": "Pune",
+        "addresses": ["Gf 11, Nilkanth Varni Apt, New Sama Road", "Shop No 3, Kamal Nayan, D J Road, Nr Rly Road", 
+                      "35, Bandukwala Bldg, 2nd Cooper St, Nr J J Hospital", "60/30, Near Ramjas Road, New Rohtak Road"]
+    },
+    {
+        "name": "Mumbai",
+        "addresses": ["101, 76/78, Plaza Shopping Centre, Sutar Chawl, Zaveri Bazaar, Kalbadevi", "2/9, Calicut Street, Ballard Estate", 
+                      "11, Hemu Plaza, Station Road, Near Mcdonald, Vile Parle(e)", "B 24, Ajit India Cmpd, 16, Wagle Estate, Thane"]
+    },
+    {
+        "name": "Bengaluru",
+        "addresses": [
+            "6b, 6b,no 1 Street, Ulsoor", "Jamiyamsjdrdblrdganganagablr-32, Rt Nagar", "176, Ranksal Twr, A S Char St, As Char Street",
+            "Raheja Arcade, Pos;mglablr-95, Koramangala", "51, 51,gundopanthstblr-53, Gundopanth Street"
+        ]
+    },
+    {
+        "name": "Kolkata",
+        "addresses":[
+            "13/3, E S Lane, Chickpet", "1917, Bazar, Opp Khandani Shafakhana", "17, R V Road, V V Puram", "3-4-1, General Bazar"
+        ]
+    }
+]
