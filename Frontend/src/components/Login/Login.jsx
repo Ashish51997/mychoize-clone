@@ -116,7 +116,7 @@ const Login = () => {
                         <input name="last_name" value={last_name} onChange={handleregChange} placeholder="Last Name"></input>
                         <input name="reg_email" value={reg_email} onChange={handleregChange} placeholder="Email"></input>
                         <input name="phone" value={phone} onChange={handleregChange} placeholder="Phone Number"></input>
-                        <input name="reg_password" value={reg_password} onChange={handleregChange} placeholder="Choose Password"></input>
+                        <input type="password" name="reg_password" value={reg_password} onChange={handleregChange} placeholder="Choose Password"></input>
                         {/* <input placeholder="Confrim Password"></input> */}
                     </div>
                     <button className={styles.signupBtn} onClick={()=> handleRegister()}>{isLoading ? "Loading..." : "Signup Now"}</button>
@@ -124,7 +124,7 @@ const Login = () => {
                 {!register && <div>
                     <div className={styles.inputContiner}>
                         <input name="login_email" value={login_email} placeholder="Email" onChange={handleLoginData}></input>
-                        <input name="login_password" value={login_password} placeholder="Password" onChange={handleLoginData}></input>
+                        <input type="password" name="login_password" value={login_password} placeholder="Password" onChange={handleLoginData}></input>
                         <p>Forgot Password ?</p>
                     </div>
                     <button className={styles.signupBtn} onClick={()=> handleLogin()}>{isLoading ? "Loading..." : "Login"}</button>
