@@ -10,7 +10,7 @@ const List = styled.div`
     padding: 2%;
 `;
 
-const CarList = () => {
+const CarList = ({dayDiff}) => {
     const value = React.useContext(Context);
     const {data} = value;
     // const {selectedToggle} = value;
@@ -18,6 +18,8 @@ const CarList = () => {
     // if (selectedToggle === "Subscription") {
     //     return <Redirect push to="/subscriptions" />
     // }
+
+    // console.log("DATA" ,data)
     
     return (
         <div>
@@ -28,7 +30,7 @@ const CarList = () => {
             <List>
                 {
                     data.map((item) => (
-                        <CardItem item={item} key={uuid()} />
+                        <CardItem item={item} key={uuid()} dayDiff={dayDiff}/>
                         // console.log(item);
                     ))
                 }

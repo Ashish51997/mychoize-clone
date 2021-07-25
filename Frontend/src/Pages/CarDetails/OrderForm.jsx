@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { FaRupeeSign } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Context from '../../Context/FilterContext';
+import axios from 'axios';
+import { loadData } from '../../Redux/localStorage';
 
 const Order = styled.div`
     margin: 1%;
@@ -142,8 +144,13 @@ const Order = styled.div`
     }
 `;
 
-const OrderForm = ({item}) => {
+const OrderForm = ({item, handleStep, dayDiff}) => {
     const value = React.useContext(Context);
+
+    const token = loadData("token");
+    console.log(token);
+
+    const [cities, setCities] = React.useState([]);
     const { handleTotal } = value;
 
     // console.log(item)
@@ -169,6 +176,48 @@ const OrderForm = ({item}) => {
         setProceed(!proceed);
     }
 
+    const postdData = () => {
+        const {pickdate} = loadData("date");
+        const {dropdate} = loadData("date");
+
+        const booking_history = [
+                {
+                    startDate: pickdate,
+                    endDate: dropdate,
+                    insuranceAmt: insuranceCheck ? true : false
+                }
+            ]            
+
+        let config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+          }
+        axios.patch(`https://mychoize-backend.herokuapp.com/users`, config, booking_history)
+            .then (res => {
+                console.log('posted');
+            })
+            .catch (err => {
+                console.log(err.message);
+            })
+    }
+
+    const handleNext = (num) => {
+        postdData();
+        handleStep(num);
+    }
+
+    React.useEffect(() => {
+        axios.get(`https://mychoize-backend.herokuapp.com/cities`)
+            .then (res => {
+                console.log(res.data.data);
+                setCities(res.data.data);
+            })
+            .catch (err => {
+                console.log(err);
+            })
+    },[]);
+
     return (
         <Order>
             <div className="head">
@@ -179,9 +228,19 @@ const OrderForm = ({item}) => {
                 <div>
                     <select>
                         <option>Car Pickup location</option>
+                        {
+                            cities?.map(ele => (
+                                <option>{ele.addresses}</option>
+                            ))
+                        }
                     </select>
                     <select>
                         <option>Car Drop location</option>
+                        {
+                            cities?.map(ele => (
+                                <option>{ele.addresses}</option>
+                            ))
+                        }
                     </select>
                 </div>
 
@@ -197,7 +256,7 @@ const OrderForm = ({item}) => {
                     <div>RENTAL</div>
                     <div><FaRupeeSign />
                         {
-                            item.toggleType === "120 km/day" ? item.limited_kms_price : item.unlimited_kms_price
+                            item.toggleType === "120 km/day" ? (item.limited_kms_price * dayDiff) : item.unlimited_kms_price
                         }
                     </div>
                 </div>
@@ -211,7 +270,7 @@ const OrderForm = ({item}) => {
                     <div>CGST</div>
                     <div><FaRupeeSign />
                         {
-                            item.toggleType === "120 km/day" ? item.limited_kms_price * 18 / 100 : item.unlimited_kms_price * 18 / 100
+                            item.toggleType === "120 km/day" ? (item.limited_kms_price * dayDiff) * 18 / 100 : item.unlimited_kms_price * 18 / 100
                         }
                     </div>
                 </div>
@@ -220,7 +279,7 @@ const OrderForm = ({item}) => {
                     <div>SGST</div>
                     <div><FaRupeeSign />
                         {
-                            item.toggleType === "120 km/day" ? item.limited_kms_price * 18 / 100 : item.unlimited_kms_price * 18 / 100
+                            item.toggleType === "120 km/day" ? (item.limited_kms_price * dayDiff) * 18 / 100 : item.unlimited_kms_price * 18 / 100
                         }
                     </div>
                 </div>
@@ -313,7 +372,8 @@ const OrderForm = ({item}) => {
                     <div><FaRupeeSign /> {item.totalSum}</div>
                 </div>
                 <div className="proceedBtn">
-                    <button disabled={!proceed}>Proceed</button>
+                    {/* <button disabled={!proceed}>Proceed</button> */}
+                    <button onClick={() => handleNext(2)}>Proceed</button>
                 </div>
             </div>
 

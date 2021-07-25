@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import carList from "../db2.json";
+// import carList from "../db2.json";
 
 const Context = React.createContext();
 export default Context;
@@ -31,8 +31,8 @@ export const ContextProvider = ({children}) => {
         ]
     });
 
-    // const [init, setInit] = React.useState([]);
-    const [data, setData] = React.useState(carList);
+    const [init, setInit] = React.useState([]);
+    const [data, setData] = React.useState(init);
 
     const [selectedToggle, setToggle] = React.useState("120 km/day");
 
@@ -58,7 +58,7 @@ export const ContextProvider = ({children}) => {
             //     setCount(count- 1);
             // }
             else {
-                setData(carList);
+                setData(init);
                 setCount(0);
             }
         }
@@ -73,7 +73,7 @@ export const ContextProvider = ({children}) => {
             //     setCount(count- 1);
             // }
             else {
-                setData(carList);
+                setData(init);
                 setCount(0);
             }
         }
@@ -88,7 +88,7 @@ export const ContextProvider = ({children}) => {
             //     setCount(count- 1);
             // }
             else {
-                setData(carList);
+                setData(init);
                 setCount(0);
             }
         }
@@ -116,15 +116,15 @@ export const ContextProvider = ({children}) => {
 
     React.useEffect(() => {
         axios.get(`https://mychoize-backend.herokuapp.com/cars`)
-            .then (res => {
-                console.log(res,data);
-                // setData(res.data);
-                // await setInit(res.data);
+            .then (async res => {
+                // console.log('response', res.data);
+                await setInit(res.data.data);
+                await setData(res.data.data);
             })
             .catch (err => {
                 console.log(err.message);
             })
-    })
+    },[])
 
     const value = {
         count,
