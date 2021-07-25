@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaRupeeSign } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import Context from '../../Context/FilterContext';
 
 const Order = styled.div`
@@ -45,6 +46,16 @@ const Order = styled.div`
         }
     }
 
+    & > .tripProtection {
+        padding: 2% 2% 0;
+        display: grid;
+        grid-template-columns: 50% 50%;
+
+        & > div:nth-child(2) {
+            text-align: right;
+        }
+    }
+
     & > .insurance {
         margin: 1%;
         border: 1px solid gray;
@@ -69,6 +80,23 @@ const Order = styled.div`
         & > .carousel, .termsNcond {
             padding: 2%;
         }
+
+        & > .carousel {
+            text-align: center;
+            display: grid;
+            grid-template-columns: 33.33% 33.33% 33.33%;
+
+            & > .carouselItem {
+                background-color: #e7e7e7;
+                margin: 1%;
+                padding: 1%;
+                border-radius: 5px;
+            }
+        }
+
+        & > .termsNcond .termsLink {
+            color: blue;
+        } 
     }
 
     & > .payableAmt {
@@ -157,10 +185,10 @@ const OrderForm = ({item}) => {
                     </select>
                 </div>
 
-                <div>
+                {/* <div>
                     <textarea rows="5" disabled />
                     <textarea rows="5" disabled />
-                </div>
+                </div> */}
             </div>
 
             <div className="order">
@@ -220,19 +248,19 @@ const OrderForm = ({item}) => {
                         <label>Lugguage Carrier</label>
                     </div>
                 </div>
+            </div>
 
-                <div className="tripProtection">
-                    <div>
-                        <input type="checkbox" checked={insuranceCheck} onChange={handleInsurance} />
-                        <label><b>Trip Protection Plan</b></label>
-                    </div>
-                    {
-                        insuranceCheck ? 
-                        <div>
-                            <FaRupeeSign /> {item.insurance_price}
-                        </div> : false
-                    }
+            <div className="tripProtection">
+                <div>
+                    <input type="checkbox" checked={insuranceCheck} onChange={handleInsurance} />
+                    <label><b>Trip Protection Plan</b></label>
                 </div>
+                {
+                    insuranceCheck ? 
+                    <div>
+                        <FaRupeeSign /> {item.insurance_price}
+                    </div> : false
+                }
             </div>
 
             <div className="insurance">
@@ -244,12 +272,38 @@ const OrderForm = ({item}) => {
                 </div>
                 
                 <div className="carousel">
-                    CAROUSEL
+                    <div className="carouselItem">
+                        <div>
+                            <img src="/Car-Details/per_accident.png" alt="personal_accident" />
+                        </div>
+                        <div>
+                            <b>Personal Accident</b>
+                            <div>(upto 5 lacs)</div>
+                        </div>
+                    </div>
+                    <div className="carouselItem">
+                        <div>
+                            <img src="/Car-Details/emergency_evac.png" alt="personal_accident" />
+                        </div>
+                        <div>
+                            <b>Emergency Medical Expenses</b>
+                            <div>(upto 1lacs)</div>
+                        </div>
+                    </div>
+                    <div className="carouselItem">
+                        <div>
+                            <img src="/Car-Details/emergency_med.png" alt="personal_accident" />
+                        </div>
+                        <div>
+                            <b>Emergency Evacuation & Repatriation</b>
+                            <div>(upto 5000)</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="termsNcond">
                     <input type="checkbox" checked={termsCheck} onChange={handleTerms} />
-                    <label>I agree to the Terms & Conditions and confirm that my age is above 18 years and less than 70 years</label>
+                    <label>I agree to the <Link className="termsLink">Terms & Conditions</Link> and confirm that my age is above 18 years and less than 70 years</label>
                 </div>
             </div>
 

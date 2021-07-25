@@ -1,5 +1,5 @@
 import React from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import carList from "../db2.json";
 
 const Context = React.createContext();
@@ -114,16 +114,17 @@ export const ContextProvider = ({children}) => {
         setSelectedCar({...selectedCar, totalSum: selectedCar.totalSum + sum});
     }
 
-    // React.useEffect(() => {
-    //     axios.get(`https://mychoize-backend.herokuapp.com/cars`)
-    //         .then (async res => {
-    //             await setData(res.data);
-    //             await setInit(res.data);
-    //         })
-    //         .catch (err => {
-    //             console.log(err.message);
-    //         })
-    // })
+    React.useEffect(() => {
+        axios.get(`https://mychoize-backend.herokuapp.com/cars`)
+            .then (res => {
+                console.log(res,data);
+                // setData(res.data);
+                // await setInit(res.data);
+            })
+            .catch (err => {
+                console.log(err.message);
+            })
+    })
 
     const value = {
         count,
