@@ -14,7 +14,7 @@ const {login, register} = require('./controller/auth.controller')
 
 app.use("/cars", carController)
 app.use("/users", userController)
-app.use("/city", cityController)
+app.use("/cities", cityController)
 app.post("/login", login)
 app.post("/register", register)
 
