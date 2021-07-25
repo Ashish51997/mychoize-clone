@@ -1,10 +1,11 @@
 import React from 'react'
 import styles from "./Navbar.module.css"
 import MenuIcon from '@material-ui/icons/Menu';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles} from '@material-ui/core/styles';
 import Popper from '@material-ui/core/Popper';
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import styled from "styled-components";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -51,6 +52,23 @@ const YellowNav = () => {
                             <option value="Bengaluru">Bengaluru</option>
                             <option value="Kolkata">Kolkata</option>
                         </select>
+
+                        <Inputdate>
+                        <input
+                      type="date"
+                      name="pickdate"
+                      min={new Date().toISOString().split("T")[0]}
+                    />
+                    </Inputdate>
+                    <Inputdate>
+                
+                        <input
+                        placeholder="when you want to ride"
+                      type="date"
+                      name="pickdate"
+                      min={new Date().toISOString().split("T")[0]}
+                    />
+                    </Inputdate>
                     </div>
                     <button className={styles.modBtn}>Modify Search</button>
                     <div className={styles.opBtnContainer}>
@@ -71,3 +89,17 @@ const YellowNav = () => {
 }
 
 export {YellowNav}
+
+const Inputdate=styled.div`
+
+input{
+    border:none;
+    padding:0.3rem;
+    border-radius:5px;
+    margin-top:5px;
+    outline: none;
+    
+
+}
+
+`

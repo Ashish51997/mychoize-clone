@@ -4,7 +4,7 @@ import CallIcon from '@material-ui/icons/Call';
 import PublicIcon from '@material-ui/icons/Public';
 import AppleIcon from '@material-ui/icons/Apple';
 import AndroidIcon from '@material-ui/icons/Android';
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 import Popper from '@material-ui/core/Popper';
@@ -97,7 +97,7 @@ const Navbar = () => {
                             <button className={styles.opBtn} onClick={handleClick}>{data.name.split(" ")[0]}</button>
                             <Popper id={id} open={open} anchorEl={anchorEl}>
                                 <div className={classes.paper}>
-                                    <p className={classes.pTag}>Account</p>
+                                <Link to="/profile" > <p className={classes.pTag}>Account</p></Link> 
                                     <p className={classes.pTag} onClick={()=> handleLogout()}>Logout</p>
                                 </div>
                             </Popper>

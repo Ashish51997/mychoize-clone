@@ -8,6 +8,7 @@ import Mid3carousal from "../mid3carousal";
 import MidCarousal from "../MidCarousal";
 import CustomizedAccordions from "../Accrodinos";
 import Mid1 from "../mid1";
+import {saveLogin} from "../../Redux/localStorage"
 
 function Carousal() {
   const arr = ["Mumbai", "Delhi", "Hydrabad", "Pune", "Kolkata", "Bhubaneswer"];
@@ -69,6 +70,7 @@ function Carousal() {
     droptime: "",
   };
   const [data, setdata] = useState(init);
+  
   const { droptime, picktime, dropdate, pickdate, city } = data;
   const custom = {
     width: "100%",
@@ -90,6 +92,9 @@ function Carousal() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+   saveLogin("date",data)
+
+   
   };
   return (
     <>
@@ -177,7 +182,7 @@ function Carousal() {
                       onChange={handleChange}
                       name="pickdate"
                       value={pickdate}
-                      min="2021-07-21"
+                      min={new Date().toISOString().split("T")[0]}
                     />
                     <Timecontainer>
                       <span>pickup time</span>
@@ -186,6 +191,7 @@ function Carousal() {
                         list="times"
                         placeholder="select"
                         name="time"
+                        min={new Date().toISOString().split("T")[0]}
                       />
                       <datalist id="times">
                         {time.map((item) => (
@@ -243,6 +249,7 @@ function Carousal() {
                   borderRadius: "5px",
                   fontWeight: "bold",
                   color: "white",
+                  cursor: 'pointer',
                 }}
               />
             </form>

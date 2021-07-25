@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import Styled from "styled-components";
+import { loadData } from "../../Redux/localStorage";
 
 function Profile() {
+  const userdata = loadData("user");
+  console.log(userdata);
+
   const [step1, setStep1] = useState(true);
   const [step2, setStep2] = useState(false);
   const [step3, setStep3] = useState(false);
@@ -74,7 +78,6 @@ function Profile() {
     setStep7(true);
   };
 
-
   return (
     <Wrapper>
       <Profiles>
@@ -88,10 +91,10 @@ function Profile() {
           alt=""
         />
         <div>
-          <strong>Ashish kumar roul</strong>{" "}
+          <strong>{userdata.name}</strong>{" "}
         </div>
-        <div>918342094808 </div>
-        <Mail>aroul303@gmail.com </Mail>
+        <div> {userdata.email}</div>
+        <Mail>{userdata.phone}</Mail>
         <Button1 value={step1} id="one" onClick={viewStep1}>
           Manage Your Documents
         </Button1>
@@ -125,25 +128,24 @@ function Profile() {
                   <Document>
                     <Preview></Preview>
                     <div>
-                     <FirstInput type='file'  />
-                     
-                         </div>
+                      <FirstInput type="file" />
+                    </div>
                   </Document>
                   <Document>
                     <Preview></Preview>
-                    <SecondInput type="file"/>
+                    <SecondInput type="file" />
                   </Document>
                   <Document>
                     <Preview></Preview>
-                    <ThirdInput type="file"/>
+                    <ThirdInput type="file" />
                   </Document>
                   <Document>
                     <Preview></Preview>
-                    <ForthInput type="file"/>
+                    <ForthInput type="file" />
                   </Document>
                   <Document>
                     <Preview></Preview>
-                    <FifthInput type="file"/>
+                    <FifthInput type="file" />
                   </Document>
                 </DocumentWrapper>
               </Manage>
@@ -268,21 +270,20 @@ const Wrapper = Styled.div`
 display: flex;
 width:85%;
 margin: auto;
+margin-top:50px;
 justify-content:center;
 gap:5%
 
 `;
 const Profiles = Styled.div`
-/* display: flex;
-flex-direction: column;
-justify-content: center; */
+
 width:28%;
 
 min-width:280px;
 max-width:280px;
 padding: 10px;
-border:1px solid red;
-
+border:1px solid grey;
+height: 530px;
 `;
 const Descreption = Styled.div`
 
@@ -290,18 +291,19 @@ const Descreption = Styled.div`
 `;
 const ItemWrapper = Styled.div`
 width:800px;
-border:1px solid red;
-height:600px;
+border:1px solid grey;
+height:550px;
 
 `;
 const Button1 = Styled.div`
 width:90%;
 height:30px;
 text-align:left;
-color:blue;
+color:rgb(51,122,190);
 margin-left: 3%;
 border-bottom: 1px solid grey;
 margin-bottom:10px ;
+font-size:14px;
 :hover{
     cursor: pointer;
    text-decoration:underline;
@@ -311,14 +313,16 @@ margin-bottom:10px ;
 
 `;
 const Mail = Styled.div`
-height:100px;
+height:40px;
 
 `;
 const DocumentWrapper = Styled.div`
 width: 90%;
 display: flex;
 flex-wrap: wrap;
-justify-content:center;
+justify-content:left;
+gap:30px;
+;
 
 
 `;
@@ -379,48 +383,48 @@ const Formu = Styled.div`
   color:white;
   border:none;
 }
-`
+`;
 const FileInput = Styled.input`
 border:none;
-background-color:red;
+background-color:rgb(169,68,66);
 color:transparent;
-width:100px;
+width:150px;
+
 ::before{
   color:white;
   background:transparent;
   width:60%;
-  padding-left:20px;
+  padding-left:30px;
 }
 
 ::-webkit-file-upload-button {
     visibility: hidden;
     }
 
-`
+`;
 const FirstInput = Styled(FileInput)`
     ::before{
       content: " DL Frontside";
     };
-`
+`;
 
 const SecondInput = Styled(FileInput)`
     ::before{
       content: "DL Backside"
     }
-`
+`;
 const ThirdInput = Styled(FileInput)`
     ::before{
       content: "Other Documents "
     }
-`
+`;
 const ForthInput = Styled(FileInput)`
     ::before{
       content: "Adhar Frontside"
     }
-`
+`;
 const FifthInput = Styled(FileInput)`
     ::before{
       content: "Adhar Backside"
     }
-`
-
+`;

@@ -1,18 +1,21 @@
-export function saveLogin(key, value){
-    localStorage.setItem(key, JSON.stringify(value))
+const saveLogin = (key,data)=>{
+    localStorage.setItem(key,JSON.stringify(data));
 }
 
 export function logout(){
     localStorage.clear()
 }
 
-export function getItem(key){
+
+const loadData = (key)=>{
     try{
-        let data = JSON.parse(localStorage.getItem(key));
-        // console.log(data)
+        let data =  localStorage.getItem(key);
+        data = JSON.parse(data);
         return data;
     }
     catch{
-        return undefined;
+        return false;
     }
 }
+
+export {loadData,saveLogin}

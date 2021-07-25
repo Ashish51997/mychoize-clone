@@ -1,6 +1,6 @@
 import {LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE} from "./actionType"
-
-const initState = {
+  import {saveLogin,LoadData} from "../localStorage"
+const initState =  {
     data: [],
     token: "",
     isAuth: false,
@@ -25,6 +25,7 @@ export const LoginReducer = (state=initState, action) => {
                 isAuth: true,
                 isLoading: false
             }
+            
         }
         case LOGIN_FAILURE: {
             return{

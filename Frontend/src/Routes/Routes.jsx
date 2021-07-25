@@ -4,6 +4,7 @@ import Carousal from "../Components/LandingPage/Landingpage"
 import {Login} from "../Components/Login/Login"
 import { Navbar } from '../Components/Navbar/Navbar'
 import { YellowNav } from '../Components/Navbar/YellowNav'
+import Profile from '../Components/User Profile/profile'
 
 const Routes = () => {
 
@@ -17,6 +18,10 @@ const Routes = () => {
                 <Route path="/user/login">
                     <YellowNav />
                     <Login />
+                </Route>
+                <Route path="/profile">
+                    <YellowNav />
+                    <Profile />
                 </Route>
             </Switch>
         </div>
