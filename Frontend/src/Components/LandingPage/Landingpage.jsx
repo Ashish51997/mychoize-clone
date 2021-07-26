@@ -8,7 +8,8 @@ import Mid3carousal from "../mid3carousal";
 import MidCarousal from "../MidCarousal";
 import CustomizedAccordions from "../Accrodinos";
 import Mid1 from "../mid1";
-import {saveLogin} from "../../Redux/localStorage"
+import { saveLogin } from "../../Redux/localStorage"
+import { useHistory } from 'react-router';
 
 function Carousal() {
   const arr = ["Mumbai", "Delhi", "Hydrabad", "Pune", "Kolkata", "Bhubaneswer"];
@@ -76,6 +77,8 @@ function Carousal() {
     width: "100%",
   };
 
+  const history = useHistory();
+
   var settings = {
     dots: true,
     arrow: false,
@@ -92,8 +95,8 @@ function Carousal() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-   saveLogin("date",data)
-
+    saveLogin("date",data)
+    history.push('/car-list');
    
   };
   return (

@@ -1,17 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:ital@1&display=swap');
 
 .App {
+  font-family: 'Heebo', sans-serif;
   text-align: center;
-  /* background-image: url("https://www.mychoize.com/imgs/banners/gp-banner.png");
-  background-size: contain;
-  /* background-repeat: repeat; */
-  /* height: 100vh; */
- 
   width: 100%; 
   
 }
 ::-webkit-scrollbar {
   display: none;
+  font-family: 'Heebo', sans-serif;
 }
 
 .App-logo {
@@ -47,9 +44,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-.ashish{
-  width: 100vw;
-  height: 100vh;
-  background-color: #61dafb;
 }

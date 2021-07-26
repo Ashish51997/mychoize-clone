@@ -15,7 +15,11 @@ const carSchema = mongoose.Schema({
     refundable_deposit: {type: Number, required: true},
     extra_luggage_carrier_price: {type: Number, required: true},
     insurance_price: {type: Number, required: true},
+<<<<<<< HEAD
+    available: true
+=======
     car_available: {type: Boolean}
+>>>>>>> a13a15eadd2bf3376d165b2f153630d5785baee7
 },{
     versionKey: false
 })
